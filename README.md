@@ -3,3 +3,6 @@
 
 ### Maintainability from codeclimate.com:
 [![Maintainability](https://api.codeclimate.com/v1/badges/901caea6cc0eda2a7c2b/maintainability)](https://codeclimate.com/github/msvoronov/frontend-project-44/maintainability)
+
+### brain-even game demo
+[![asciicast](https://asciinema.org/a/673754.svg)](https://asciinema.org/a/673754)
