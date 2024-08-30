@@ -1,9 +1,11 @@
 #!/usr/bin/env node
-import readlineSync from 'readline-sync';
-import { greetings, userName } from '../src/cli.js';
+import greetings from '../src/cli.js';
+import { sayRulesGame, getUserAnswer } from '../src/index.js';
 
-console.log('Welcome to the Brain Games!');
-greetings();
+const userName = greetings();
+
+// Сгенерировать рандомное число
+const generateRandNumber = () => Math.round(Math.random() * 100);
 
 // Корректен ли ответ
 const isAnswerValid = (answer) => (!!(answer === 'yes' || answer === 'no'));
@@ -11,7 +13,7 @@ const isAnswerValid = (answer) => (!!(answer === 'yes' || answer === 'no'));
 // Чётно ли число в вопросе
 const isQuestionEven = (question) => (question % 2 === 0);
 
-// Вернуть верный ответ как "yes" / "no"
+// Получить верный ответ как "yes" / "no"
 const getAnswerCorrect = (question) => (isQuestionEven(question) ? 'yes' : 'no');
 
 // Верен ли передаваемый ответ
@@ -20,11 +22,11 @@ const isAnswerCorrect = (question, answer) => {
   return correctAnswer === answer;
 };
 
-console.log('Answer "yes" if the number is even, otherwise answer "no".');
+sayRulesGame('Answer "yes" if the number is even, otherwise answer "no".');
 
 for (let i = 0; i < 3; i += 1) {
-  const question = Math.round(Math.random() * 100);
-  const userAnswer = readlineSync.question(`Question: ${question}\nYour answer: `);
+  const question = generateRandNumber();
+  const userAnswer = getUserAnswer(question);
   if (isAnswerValid(userAnswer) && isAnswerCorrect(question, userAnswer)) {
     console.log('Correct!');
   } else {
