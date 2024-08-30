@@ -8,22 +8,26 @@ const userName = greetings();
 const generateRandNumber = () => Math.round(Math.random() * 100);
 
 // Выбрать рандомный оператор
-const getRandOperator = () => {  
+const getRandOperator = () => {
   const operators = ['+', '-', '*'];
   const randomIndex = Math.floor(Math.random() * (operators.length - 1));
-  return operators[randomIndex];  
+  return operators[randomIndex];
 };
 
 // Получить верный ответ
 const getAnswerCorrect = (question) => {
   const [firstNumber, operator, secondNumber] = question.split(' ');
+  let answerCorrect;
   if (operator === '+') {
-    return Number(firstNumber) + Number(secondNumber);
-  } else if (operator === '-') {
-    return Number(firstNumber) - Number(secondNumber);
-  } else if (operator === '*') {
-    return Number(firstNumber) * Number(secondNumber);
+    answerCorrect = Number(firstNumber) + Number(secondNumber);
   }
+  if (operator === '-') {
+    answerCorrect = Number(firstNumber) - Number(secondNumber);
+  }
+  if (operator === '*') {
+    answerCorrect = Number(firstNumber) * Number(secondNumber);
+  }
+  return answerCorrect;
 };
 
 // Верен ли передаваемый ответ
