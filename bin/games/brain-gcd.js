@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import greetings from '../../src/cli.js';
 import {
-  sayRulesGame, getUserAnswer, generateRandNumber, printResultRound, congratsIfRoundLast
+  sayRulesGame, getUserAnswer, generateRandNumber, printResultRound, congratsIfRoundLast,
 } from '../../src/index.js';
 
 const userName = greetings();
@@ -28,7 +28,7 @@ for (let i = 1; i < 4; i += 1) {
   const correctAnswer = getAnswerCorrect(question);
 
   if (!printResultRound(correctAnswer, userAnswer, userName)) {
-    break
+    break;
   }
 
   congratsIfRoundLast(i, userName);
