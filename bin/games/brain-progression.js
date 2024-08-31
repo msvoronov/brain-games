@@ -11,7 +11,7 @@ sayRulesGame('What number is missing in the progression?');
 for (let i = 1; i < 4; i += 1) {
   const firstNumber = generateRandNumberSmall();
   const step = Math.max(1, generateRandNumberSmall()); // Что бы step не оказался равен 0
-  const randomIndex = generateRandNumberSmall() - 1; // Что бы randomIndex не оказался равен 10
+  const randomIndex = Math.max(1, generateRandNumberSmall() - 1); // Ограничить диапазоном "0..9"
   const progression = [];
   const progressionLength = 10;
   for (let index = 0; index < progressionLength; index += 1) {
