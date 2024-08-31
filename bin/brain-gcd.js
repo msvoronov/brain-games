@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import greetings from '../src/cli.js';
-import { sayRulesGame, getUserAnswer, generateRandNumber } from '../src/index.js';
+import {
+  sayRulesGame, getUserAnswer, generateRandNumber, isAnswerCorrect,
+} from '../src/index.js';
 
 const userName = greetings();
 
@@ -16,12 +18,6 @@ const getAnswerCorrect = (question) => {
   return answerCorrect;
 };
 
-// Верен ли передаваемый ответ
-const isAnswerCorrect = (question, answer) => {
-  const correctAnswer = getAnswerCorrect(question);
-  return correctAnswer === answer;
-};
-
 sayRulesGame('Find the greatest common divisor of given numbers.');
 
 for (let i = 0; i < 3; i += 1) {
@@ -29,7 +25,7 @@ for (let i = 0; i < 3; i += 1) {
   const secondNumber = generateRandNumber();
   const question = `${firstNumber} ${secondNumber}`;
   const userAnswer = getUserAnswer(question);
-  if (isAnswerCorrect(question, Number(userAnswer))) {
+  if (isAnswerCorrect(getAnswerCorrect(question), Number(userAnswer))) {
     console.log('Correct!');
   } else {
     console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${getAnswerCorrect(question)}'.\nLet's try again, ${userName}!`);

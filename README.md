@@ -8,3 +8,6 @@
 
 ### brain-gcd game demo
 [![asciicast](https://asciinema.org/a/674232.svg)](https://asciinema.org/a/674232)
+
+### brain-progression game demo
+[![asciicast](https://asciinema.org/a/674235.svg)](https://asciinema.org/a/674235)
