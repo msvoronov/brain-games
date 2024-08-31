@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import greetings from '../../src/cli.js';
 import {
-  sayRulesGame, getUserAnswer, generateRandNumber, isAnswerCorrect,
+  sayRulesGame, getUserAnswer, generateRandNumber, printResultRound, congratsIfRoundLast
 } from '../../src/index.js';
 
 const userName = greetings();
@@ -14,17 +14,14 @@ const getAnswerCorrect = (question) => (isQuestionEven(question) ? 'yes' : 'no')
 
 sayRulesGame('Answer "yes" if the number is even, otherwise answer "no".');
 
-for (let i = 0; i < 3; i += 1) {
+for (let i = 1; i < 4; i += 1) {
   const question = generateRandNumber();
   const userAnswer = getUserAnswer(question);
-  if (isAnswerCorrect(getAnswerCorrect(question), userAnswer)) {
-    console.log('Correct!');
-  } else {
-    console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${getAnswerCorrect(question)}'.\nLet's try again, ${userName}!`);
-    break;
-  }
+  const correctAnswer = getAnswerCorrect(question);
 
-  if (i === 2) {
-    console.log(`Congratulations, ${userName}!`);
+  if (!printResultRound(correctAnswer, userAnswer, userName)) {
+    break
   }
+  
+  congratsIfRoundLast(i, userName);
 }
