@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import greetings from '../src/cli.js';
+import greetings from '../../src/cli.js';
 import {
   sayRulesGame, getUserAnswer, generateRandNumber, isAnswerCorrect,
-} from '../src/index.js';
+} from '../../src/index.js';
 
 const userName = greetings();
 
