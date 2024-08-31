@@ -4,25 +4,14 @@ import { sayRulesGame, getUserAnswer, generateRandNumber } from '../src/index.js
 
 const userName = greetings();
 
-// Выбрать рандомный оператор
-const getRandOperator = () => {
-  const operators = ['+', '-', '*'];
-  const randomIndex = Math.floor(Math.random() * (operators.length - 1));
-  return operators[randomIndex];
-};
-
 // Получить верный ответ
 const getAnswerCorrect = (question) => {
-  const [firstNumber, operator, secondNumber] = question.split(' ');
-  let answerCorrect;
-  if (operator === '+') {
-    answerCorrect = Number(firstNumber) + Number(secondNumber);
-  }
-  if (operator === '-') {
-    answerCorrect = Number(firstNumber) - Number(secondNumber);
-  }
-  if (operator === '*') {
-    answerCorrect = Number(firstNumber) * Number(secondNumber);
+  const [firstNumber, secondNumber] = question.split(' ');
+  let answerCorrect = 1;
+  for (let i = 2; i <= Math.min(firstNumber, secondNumber); i += 1) {
+    if (firstNumber % i === 0 && secondNumber % i === 0) {
+      answerCorrect = i;
+    }
   }
   return answerCorrect;
 };
@@ -33,13 +22,12 @@ const isAnswerCorrect = (question, answer) => {
   return correctAnswer === answer;
 };
 
-sayRulesGame('What is the result of the expression?');
+sayRulesGame('Find the greatest common divisor of given numbers.');
 
 for (let i = 0; i < 3; i += 1) {
   const firstNumber = generateRandNumber();
   const secondNumber = generateRandNumber();
-  const operator = getRandOperator();
-  const question = `${firstNumber} ${operator} ${secondNumber}`;
+  const question = `${firstNumber} ${secondNumber}`;
   const userAnswer = getUserAnswer(question);
   if (isAnswerCorrect(question, Number(userAnswer))) {
     console.log('Correct!');

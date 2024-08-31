@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 import greetings from '../src/cli.js';
-import { sayRulesGame, getUserAnswer } from '../src/index.js';
+import { sayRulesGame, getUserAnswer, generateRandNumber } from '../src/index.js';
 
 const userName = greetings();
-
-// Сгенерировать рандомное число
-const generateRandNumber = () => Math.round(Math.random() * 100);
 
 // Корректен ли ответ
 const isAnswerValid = (answer) => (!!(answer === 'yes' || answer === 'no'));

@@ -5,3 +5,6 @@
 
 ### brain-calc game demo
 [![asciicast](https://asciinema.org/a/674079.svg)](https://asciinema.org/a/674079)
+
+### brain-gcd game demo
+[![asciicast](https://asciinema.org/a/674232.svg)](https://asciinema.org/a/674232)
