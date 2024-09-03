@@ -3,8 +3,10 @@ import {
 } from '../index.js';
 
 const brainGcd = () => {
-  // Получить верный ответ
-  const getAnswerCorrect = (question) => {
+  const userName = greetings();
+  sayRulesGame('Find the greatest common divisor of given numbers.');
+
+  const getAnswerCorrect = (question) => { // Получить верный ответ
     const [firstNumber, secondNumber] = question.split(' ');
     let answerCorrect = 1;
     for (let i = 2; i <= Math.min(firstNumber, secondNumber); i += 1) {
@@ -14,23 +16,17 @@ const brainGcd = () => {
     }
     return answerCorrect;
   };
-  
-  const userName = greetings();
-  sayRulesGame('Find the greatest common divisor of given numbers.');
-  
-  const playRound = () => {
-    const firstNumber = generateRandNumber();
-    const secondNumber = generateRandNumber();
-    const question = `${firstNumber} ${secondNumber}`;
+  const playRound = () => { // Выполнение одного раунда
+    const question = `${generateRandNumber()} ${generateRandNumber()}`;
     const userAnswer = getUserAnswer(question);
     const correctAnswer = getAnswerCorrect(question);
-  
+
     if (!printResultRound(correctAnswer, userAnswer, userName)) {
       return false;
     }
     return true;
-  }
-  
+  };
+
   cycleQuestionAnswer(playRound, userName);
 };
 

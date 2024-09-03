@@ -1,10 +1,13 @@
 import {
-  greetings, sayRulesGame, getUserAnswer, generateRandNumber, cycleQuestionAnswer, printResultRound,
+  greetings, sayRulesGame, getUserAnswer,
+  generateRandNumber, cycleQuestionAnswer, printResultRound,
 } from '../index.js';
 
 const brainPrime = () => {
-  // Чётно ли число в вопросе
-  const isQuestionPrime = (question) => {
+  const userName = greetings();
+  sayRulesGame('Answer "yes" if given number is prime. Otherwise answer "no".');
+
+  const isQuestionPrime = (question) => { // Чётно ли число в вопросе
     if (question <= 1) {
       return false;
     }
@@ -16,24 +19,18 @@ const brainPrime = () => {
     }
     return divisors === 2;
   };
-  
-  // Получить верный ответ как "yes" / "no"
-  const getAnswerCorrect = (question) => (isQuestionPrime(question) ? 'yes' : 'no');
-  
-  const userName = greetings();
-  sayRulesGame('Answer "yes" if given number is prime. Otherwise answer "no".');
-  
-  const playRound = () => {
+  const getAnswerCorrect = (question) => (isQuestionPrime(question) ? 'yes' : 'no'); // Получить верный ответ как "yes" / "no"
+  const playRound = () => { // Выполнение одного раунда
     const question = generateRandNumber();
     const userAnswer = getUserAnswer(question);
     const correctAnswer = getAnswerCorrect(question);
-  
+
     if (!printResultRound(correctAnswer, userAnswer, userName)) {
       return false;
     }
     return true;
-  }
-  
+  };
+
   cycleQuestionAnswer(playRound, userName);
 };
 

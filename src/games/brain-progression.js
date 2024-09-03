@@ -1,12 +1,13 @@
 import {
-  greetings, sayRulesGame, getUserAnswer, generateRandNumberSmall, cycleQuestionAnswer, printResultRound,
+  greetings, sayRulesGame, getUserAnswer,
+  generateRandNumberSmall, cycleQuestionAnswer, printResultRound,
 } from '../index.js';
 
-const brainProgression = () => {  
+const brainProgression = () => {
   const userName = greetings();
   sayRulesGame('What number is missing in the progression?');
-  
-  const playRound = () => {
+
+  const playRound = () => { // Выполнение одного раунда
     const firstNumber = generateRandNumberSmall();
     const step = Math.max(1, generateRandNumberSmall()); // Что бы step не оказался равен 0
     const randomIndex = Math.max(1, generateRandNumberSmall() - 1); // Ограничить диапазоном "0..9"
@@ -21,13 +22,13 @@ const brainProgression = () => {
     question = question.join(' ');
     const userAnswer = getUserAnswer(question);
     const correctAnswer = hiddenNum;
-  
+
     if (!printResultRound(correctAnswer, userAnswer, userName)) {
       return false;
     }
     return true;
-  }
-  
+  };
+
   cycleQuestionAnswer(playRound, userName);
 };
 

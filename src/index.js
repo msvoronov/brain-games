@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
 
-export { greetings } from './cli.js';
+export { default as greetings } from './cli.js';
 
 export const sayRulesGame = (rulesGame) => console.log(rulesGame);
 
@@ -24,7 +24,7 @@ export const printResultRound = (correctAnswer, userAnswer, userName) => {
 const congrats = (userName) => console.log(`Congratulations, ${userName}!`);
 export const cycleQuestionAnswer = (playRound, userName) => {
   let isRoundEndWithoutError = true;
-  for (let round = 1; round < 4; round += 1) {    
+  for (let round = 1; round < 4; round += 1) {
     isRoundEndWithoutError = playRound();
     if (!isRoundEndWithoutError) {
       break;
@@ -32,5 +32,5 @@ export const cycleQuestionAnswer = (playRound, userName) => {
   }
   if (isRoundEndWithoutError) {
     congrats(userName);
-  }  
+  }
 };

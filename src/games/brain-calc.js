@@ -3,15 +3,15 @@ import {
 } from '../index.js';
 
 const brainCalc = () => {
-  // Выбрать рандомный оператор
-  const getRandOperator = () => {
+  const userName = greetings();
+  sayRulesGame('What is the result of the expression?');
+
+  const getRandOperator = () => { // Выбрать рандомный оператор
     const operators = ['+', '-', '*'];
     const randomIndex = Math.floor(Math.random() * (operators.length - 1));
     return operators[randomIndex];
   };
-  
-  // Получить верный ответ
-  const getAnswerCorrect = (question) => {
+  const getAnswerCorrect = (question) => { // Получить верный ответ
     const [firstNumber, operator, secondNumber] = question.split(' ');
     let answerCorrect;
     if (operator === '+') {
@@ -25,24 +25,17 @@ const brainCalc = () => {
     }
     return answerCorrect;
   };
-  
-  const userName = greetings();
-  sayRulesGame('What is the result of the expression?');
-  
-  const playRound = () => {
-    const firstNumber = generateRandNumber();
-    const secondNumber = generateRandNumber();
-    const operator = getRandOperator();
-    const question = `${firstNumber} ${operator} ${secondNumber}`;
+  const playRound = () => { // Выполнение одного раунда
+    const question = `${generateRandNumber()} ${getRandOperator()} ${generateRandNumber()}`;
     const userAnswer = getUserAnswer(question);
     const correctAnswer = getAnswerCorrect(question);
-  
+
     if (!printResultRound(correctAnswer, userAnswer, userName)) {
       return false;
     }
     return true;
-  }
-  
+  };
+
   cycleQuestionAnswer(playRound, userName);
 };
 
