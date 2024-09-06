@@ -1,42 +1,38 @@
-import {
-  greetings, sayRulesGame, getUserAnswer, generateRandNumber, cycleQuestionAnswer, printResultRound,
-} from '../index.js';
+import runGame from '../index.js';
 
-const brainCalc = () => {
-  const userName = greetings();
-  sayRulesGame('What is the result of the expression?');
+// Сгенерировать случайное число от 0 до 100
+const generateRandNumber = () => Math.round(Math.random() * 100);
 
-  const getRandOperator = () => { // Выбрать рандомный оператор
-    const operators = ['+', '-', '*'];
-    const randomIndex = Math.floor(Math.random() * (operators.length - 1));
-    return operators[randomIndex];
-  };
-  const getAnswerCorrect = (question) => { // Получить верный ответ
-    const [firstNumber, operator, secondNumber] = question.split(' ');
-    let answerCorrect;
-    if (operator === '+') {
-      answerCorrect = Number(firstNumber) + Number(secondNumber);
-    }
-    if (operator === '-') {
-      answerCorrect = Number(firstNumber) - Number(secondNumber);
-    }
-    if (operator === '*') {
-      answerCorrect = Number(firstNumber) * Number(secondNumber);
-    }
-    return answerCorrect;
-  };
-  const playRound = () => { // Выполнение одного раунда
-    const question = `${generateRandNumber()} ${getRandOperator()} ${generateRandNumber()}`;
-    const userAnswer = getUserAnswer(question);
-    const correctAnswer = getAnswerCorrect(question);
-
-    if (!printResultRound(correctAnswer, userAnswer, userName)) {
-      return false;
-    }
-    return true;
-  };
-
-  cycleQuestionAnswer(playRound, userName);
+// Выбрать рандомный оператор
+const getRandOperator = () => {
+  const operators = ['+', '-', '*'];
+  const randomIndex = Math.floor(Math.random() * (operators.length - 1));
+  return operators[randomIndex];
 };
 
-export default brainCalc;
+// Сконструировать вопрос
+const getQuestion = () => `${generateRandNumber()} ${getRandOperator()} ${generateRandNumber()}`;
+
+// Получить верный ответ
+const getCorrectAnswer = (question) => {
+  const [firstNumber, operator, secondNumber] = question.split(' ');
+  let correctAnswer;
+  if (operator === '+') {
+    correctAnswer = Number(firstNumber) + Number(secondNumber);
+  }
+  if (operator === '-') {
+    correctAnswer = Number(firstNumber) - Number(secondNumber);
+  }
+  if (operator === '*') {
+    correctAnswer = Number(firstNumber) * Number(secondNumber);
+  }
+  return correctAnswer;
+};
+
+// Запустить игру
+const runBrainCalc = () => {
+  const rulesGame = 'What is the result of the expression?';
+  runGame(rulesGame, getQuestion, getCorrectAnswer);
+};
+
+export default runBrainCalc;

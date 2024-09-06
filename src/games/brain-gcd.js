@@ -1,33 +1,27 @@
-import {
-  greetings, sayRulesGame, getUserAnswer, generateRandNumber, cycleQuestionAnswer, printResultRound,
-} from '../index.js';
+import runGame from '../index.js';
 
-const brainGcd = () => {
-  const userName = greetings();
-  sayRulesGame('Find the greatest common divisor of given numbers.');
+// Сгенерировать случайное число от 0 до 100
+const generateRandNumber = () => Math.round(Math.random() * 100);
 
-  const getAnswerCorrect = (question) => { // Получить верный ответ
-    const [firstNumber, secondNumber] = question.split(' ');
-    let answerCorrect = 1;
-    for (let i = 2; i <= Math.min(firstNumber, secondNumber); i += 1) {
-      if (firstNumber % i === 0 && secondNumber % i === 0) {
-        answerCorrect = i;
-      }
+// Сконструировать вопрос
+const getQuestion = () => `${generateRandNumber()} ${generateRandNumber()}`;
+
+// Получить верный ответ
+const getCorrectAnswer = (question) => {
+  const [firstNumber, secondNumber] = question.split(' ');
+  let correctAnswer = 1;
+  for (let i = 2; i <= Math.min(firstNumber, secondNumber); i += 1) {
+    if (firstNumber % i === 0 && secondNumber % i === 0) {
+      correctAnswer = i;
     }
-    return answerCorrect;
-  };
-  const playRound = () => { // Выполнение одного раунда
-    const question = `${generateRandNumber()} ${generateRandNumber()}`;
-    const userAnswer = getUserAnswer(question);
-    const correctAnswer = getAnswerCorrect(question);
-
-    if (!printResultRound(correctAnswer, userAnswer, userName)) {
-      return false;
-    }
-    return true;
-  };
-
-  cycleQuestionAnswer(playRound, userName);
+  }
+  return correctAnswer;
 };
 
-export default brainGcd;
+// Запустить игру
+const runBrainGcd = () => {
+  const rulesGame = 'Find the greatest common divisor of given numbers.';
+  runGame(rulesGame, getQuestion, getCorrectAnswer);
+};
+
+export default runBrainGcd;

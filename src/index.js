@@ -1,36 +1,42 @@
 import readlineSync from 'readline-sync';
 
-export { default as greetings } from './cli.js';
+import getUserName from './cli.js';
 
-export const sayRulesGame = (rulesGame) => console.log(rulesGame);
+const sayRulesGame = (rulesGame) => console.log(rulesGame);
 
-export const getUserAnswer = (question) => readlineSync.question(`Question: ${question}\nYour answer: `);
+const getUserAnswer = (question) => readlineSync.question(`Question: ${question}\nYour answer: `);
 
-export const generateRandNumber = () => Math.round(Math.random() * 100);
+const isAnswerCorrect = (correctAnswer, answer) => String(correctAnswer) === String(answer);
 
-export const generateRandNumberSmall = () => Math.round(Math.random() * 10);
+const sayCongratulations = (userName) => console.log(`Congratulations, ${userName}!`);
 
-export const isAnswerCorrect = (correctAnswer, answer) => String(correctAnswer) === String(answer);
+// Запуск игры - принимает на вход правила, функции генерации вопроса и получения верного ответа
+const runGame = (rulesGame, getQuestion, getCorrectAnswer) => {
+  // Вывод приветствия и правил игры, получение имени пользователя
+  const userName = getUserName();
+  sayRulesGame(rulesGame);
 
-export const printResultRound = (correctAnswer, userAnswer, userName) => {
-  if (isAnswerCorrect(correctAnswer, userAnswer)) {
-    console.log('Correct!');
-    return true;
-  }
-  console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${userName}!`);
-  return false;
-};
-
-const congrats = (userName) => console.log(`Congratulations, ${userName}!`);
-export const cycleQuestionAnswer = (playRound, userName) => {
+  // Запуск цикла вопрос-ответ с проверкой результата раунда
   let isRoundEndWithoutError = true;
   for (let round = 1; round < 4; round += 1) {
-    isRoundEndWithoutError = playRound();
-    if (!isRoundEndWithoutError) {
+    const question = getQuestion();
+    const userAnswer = getUserAnswer(question);
+    const correctAnswer = getCorrectAnswer(question);
+
+    const userAnswerIsCorrect = isAnswerCorrect(correctAnswer, userAnswer);
+    if (userAnswerIsCorrect) {
+      console.log('Correct!');
+    } else {
+      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${userName}!`);
+      isRoundEndWithoutError = false;
       break;
     }
   }
+
+  // Вывод поздравления если не было ошибок
   if (isRoundEndWithoutError) {
-    congrats(userName);
+    sayCongratulations(userName);
   }
 };
+
+export default runGame;
