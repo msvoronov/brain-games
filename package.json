@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "[![Actions Status](https://github.com/msvoronov/frontend-project-44/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/msvoronov/frontend-project-44/actions)",
+  "description": "Brain-games project. 5 mini-games that run in the terminal",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,8 +28,6 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
     "globals": "^15.9.0"
   }
 }
