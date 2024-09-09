@@ -6,7 +6,8 @@ const generateRandNumber = () => Math.round(Math.random() * 100);
 // Выбрать рандомный оператор
 const getRandOperator = () => {
   const operators = ['+', '-', '*'];
-  const randomIndex = Math.floor(Math.random() * (operators.length - 1));
+  const numberOfOperators = operators.length;
+  const randomIndex = Math.floor(Math.random() * numberOfOperators);
   return operators[randomIndex];
 };
 
@@ -16,23 +17,27 @@ const getQuestion = () => `${generateRandNumber()} ${getRandOperator()} ${genera
 // Получить верный ответ
 const getCorrectAnswer = (question) => {
   const [firstNumber, operator, secondNumber] = question.split(' ');
-  let correctAnswer;
-  if (operator === '+') {
-    correctAnswer = Number(firstNumber) + Number(secondNumber);
+  switch (operator) {
+    case '+':
+      return Number(firstNumber) + Number(secondNumber);
+    case '-':
+      return Number(firstNumber) - Number(secondNumber);
+    default: // case '*'
+      return Number(firstNumber) * Number(secondNumber);
   }
-  if (operator === '-') {
-    correctAnswer = Number(firstNumber) - Number(secondNumber);
-  }
-  if (operator === '*') {
-    correctAnswer = Number(firstNumber) * Number(secondNumber);
-  }
-  return correctAnswer;
+};
+
+// Собираем данные для передачи их в игру
+const getQuestionAndAnswer = () => {
+  const question = getQuestion();
+  const correctAnswer = getCorrectAnswer(question);
+  return [question, correctAnswer];
 };
 
 // Запустить игру
 const runBrainCalc = () => {
   const rulesGame = 'What is the result of the expression?';
-  runGame(rulesGame, getQuestion, getCorrectAnswer);
+  runGame(rulesGame, getQuestionAndAnswer);
 };
 
 export default runBrainCalc;

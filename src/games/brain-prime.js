@@ -23,10 +23,17 @@ const isQuestionPrime = (question) => {
 // Получить верный ответ как "yes" / "no"
 const getCorrectAnswer = (question) => (isQuestionPrime(question) ? 'yes' : 'no');
 
+// Собираем данные для передачи их в игру
+const getQuestionAndAnswer = () => {
+  const question = getQuestion();
+  const correctAnswer = getCorrectAnswer(question);
+  return [question, correctAnswer];
+};
+
 // Запустить игру
 const runBrainPrime = () => {
   const rulesGame = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-  runGame(rulesGame, getQuestion, getCorrectAnswer);
+  runGame(rulesGame, getQuestionAndAnswer);
 };
 
 export default runBrainPrime;

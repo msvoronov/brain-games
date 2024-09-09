@@ -10,33 +10,29 @@ const isAnswerCorrect = (correctAnswer, answer) => String(correctAnswer) === Str
 
 const sayCongratulations = (userName) => console.log(`Congratulations, ${userName}!`);
 
-// Запуск игры - принимает на вход правила, функции генерации вопроса и получения верного ответа
-const runGame = (rulesGame, getQuestion, getCorrectAnswer) => {
+// Запуск игры - принимает на вход правила и функцию генерации пары вопрос-ответ
+const runGame = (rulesGame, getQuestionAndAnswer) => {
   // Вывод приветствия и правил игры, получение имени пользователя
   const userName = getUserName();
   sayRulesGame(rulesGame);
 
   // Запуск цикла вопрос-ответ с проверкой результата раунда
-  let isRoundEndWithoutError = true;
-  for (let round = 1; round < 4; round += 1) {
-    const question = getQuestion();
+  const maxNumberOfRound = 3;
+  for (let round = 1; round <= maxNumberOfRound; round += 1) {
+    const [question, correctAnswer] = getQuestionAndAnswer();
     const userAnswer = getUserAnswer(question);
-    const correctAnswer = getCorrectAnswer(question);
 
     const userAnswerIsCorrect = isAnswerCorrect(correctAnswer, userAnswer);
     if (userAnswerIsCorrect) {
       console.log('Correct!');
     } else {
       console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${userName}!`);
-      isRoundEndWithoutError = false;
-      break;
+      return;
     }
   }
 
-  // Вывод поздравления если не было ошибок
-  if (isRoundEndWithoutError) {
-    sayCongratulations(userName);
-  }
+  // Вывод поздравления (не сработает, если в цикле была ошибка - см. стр. 31)
+  sayCongratulations(userName);
 };
 
 export default runGame;

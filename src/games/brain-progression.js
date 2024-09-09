@@ -31,19 +31,24 @@ const getCorrectAnswer = (question) => {
   const step = indexOfHiddenNum <= 1
     ? progression[3] - progression[2]
     : progression[1] - progression[0];
-  let correctAnswer;
+
   if (indexOfHiddenNum === 0) {
-    correctAnswer = progression[1] - step;
-  } else {
-    correctAnswer = Number(progression[indexOfHiddenNum - 1]) + Number(step);
+    return progression[1] - step;
   }
-  return correctAnswer;
+  return Number(progression[indexOfHiddenNum - 1]) + Number(step);
+};
+
+// Собираем данные для передачи их в игру
+const getQuestionAndAnswer = () => {
+  const question = getQuestion();
+  const correctAnswer = getCorrectAnswer(question);
+  return [question, correctAnswer];
 };
 
 // Запустить игру
 const runBrainProgression = () => {
   const rulesGame = 'What number is missing in the progression?';
-  runGame(rulesGame, getQuestion, getCorrectAnswer);
+  runGame(rulesGame, getQuestionAndAnswer);
 };
 
 export default runBrainProgression;
