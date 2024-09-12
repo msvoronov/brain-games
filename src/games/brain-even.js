@@ -1,21 +1,14 @@
 import runGame from '../index.js';
-
-// Сгенерировать случайное число от 0 до 100
-const generateRandNumber = () => Math.round(Math.random() * 100);
-
-// Сконструировать вопрос
-const getQuestion = () => generateRandNumber();
+import getRandNumber from '../random.js';
 
 // Чётно ли число в вопросе
 const isQuestionEven = (question) => (question % 2 === 0);
 
-// Получить верный ответ как "yes" / "no"
-const getCorrectAnswer = (question) => (isQuestionEven(question) ? 'yes' : 'no');
-
 // Собираем данные для передачи их в игру
 const getQuestionAndAnswer = () => {
-  const question = getQuestion();
-  const correctAnswer = getCorrectAnswer(question);
+  const multiplier = 100;
+  const question = getRandNumber(multiplier);
+  const correctAnswer = isQuestionEven(question) ? 'yes' : 'no';
   return [question, correctAnswer];
 };
 

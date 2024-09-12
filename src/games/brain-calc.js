@@ -1,7 +1,5 @@
 import runGame from '../index.js';
-
-// Сгенерировать случайное число от 0 до 100
-const generateRandNumber = () => Math.round(Math.random() * 100);
+import getRandNumber from '../random.js';
 
 // Выбрать рандомный оператор
 const getRandOperator = () => {
@@ -11,26 +9,28 @@ const getRandOperator = () => {
   return operators[randomIndex];
 };
 
-// Сконструировать вопрос
-const getQuestion = () => `${generateRandNumber()} ${getRandOperator()} ${generateRandNumber()}`;
-
-// Получить верный ответ
-const getCorrectAnswer = (question) => {
-  const [firstNumber, operator, secondNumber] = question.split(' ');
+// Получить верный ответ (как string)
+const getCorrectAnswer = ([firstNumber, operator, secondNumber]) => {
   switch (operator) {
     case '+':
-      return Number(firstNumber) + Number(secondNumber);
+      return String(Number(firstNumber) + Number(secondNumber));
     case '-':
-      return Number(firstNumber) - Number(secondNumber);
-    default: // case '*'
-      return Number(firstNumber) * Number(secondNumber);
+      return String(firstNumber - secondNumber);
+    case '*':
+      return String(firstNumber * secondNumber);
+    default:
+      throw new Error(`Unknown operator: '${operator}'!`);
   }
 };
 
 // Собираем данные для передачи их в игру
 const getQuestionAndAnswer = () => {
-  const question = getQuestion();
-  const correctAnswer = getCorrectAnswer(question);
+  const multiplier = 100;
+  const gameData = [getRandNumber(multiplier), getRandOperator(), getRandNumber(multiplier)];
+
+  const question = gameData.join(' ');
+  const correctAnswer = getCorrectAnswer(gameData);
+
   return [question, correctAnswer];
 };
 

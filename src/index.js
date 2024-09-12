@@ -6,7 +6,7 @@ const sayRulesGame = (rulesGame) => console.log(rulesGame);
 
 const getUserAnswer = (question) => readlineSync.question(`Question: ${question}\nYour answer: `);
 
-const isAnswerCorrect = (correctAnswer, answer) => String(correctAnswer) === String(answer);
+const isAnswerCorrect = (correctAnswer, answer) => correctAnswer === answer;
 
 const sayCongratulations = (userName) => console.log(`Congratulations, ${userName}!`);
 
