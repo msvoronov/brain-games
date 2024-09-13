@@ -6,8 +6,7 @@ const isQuestionEven = (question) => (question % 2 === 0);
 
 // Собираем данные для передачи их в игру
 const getQuestionAndAnswer = () => {
-  const multiplier = 100;
-  const question = getRandNumber(multiplier);
+  const question = getRandNumber();
   const correctAnswer = isQuestionEven(question) ? 'yes' : 'no';
   return [question, correctAnswer];
 };

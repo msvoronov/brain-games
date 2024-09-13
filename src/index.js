@@ -22,7 +22,7 @@ const runGame = (rulesGame, getQuestionAndAnswer) => {
     const [question, correctAnswer] = getQuestionAndAnswer();
     const userAnswer = getUserAnswer(question);
 
-    const userAnswerIsCorrect = isAnswerCorrect(correctAnswer, userAnswer);
+    const userAnswerIsCorrect = isAnswerCorrect(String(correctAnswer), userAnswer);
     if (userAnswerIsCorrect) {
       console.log('Correct!');
     } else {

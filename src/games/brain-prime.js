@@ -17,8 +17,7 @@ const isQuestionPrime = (question) => {
 
 // Собираем данные для передачи их в игру
 const getQuestionAndAnswer = () => {
-  const multiplier = 100;
-  const question = getRandNumber(multiplier);
+  const question = getRandNumber();
   const correctAnswer = isQuestionPrime(question) ? 'yes' : 'no';
   return [question, correctAnswer];
 };

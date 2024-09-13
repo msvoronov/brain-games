@@ -1,13 +1,9 @@
 import runGame from '../index.js';
 import getRandNumber from '../random.js';
 
-// Сконструировать прогрессию в виде массива
-const getProgression = () => {
-  const multiplier = 10;
-  const firstNumber = getRandNumber(multiplier);
-  const step = Math.max(1, getRandNumber(multiplier)); // Что бы step не оказался равен 0
+// Получить прогрессию в виде массива
+const getProgression = (firstNumber, step, progressionLength = 10) => {
   const progression = [];
-  const progressionLength = 10;
   for (let index = 0; index < progressionLength; index += 1) {
     progression.push(firstNumber + (step * index));
   }
@@ -25,7 +21,10 @@ const getQuestion = (progression, randomIndex) => {
 // Собираем данные для передачи их в игру
 const getQuestionAndAnswer = () => {
   // Получить прогресcию как массив
-  const progression = getProgression();
+  const multiplier = 10;
+  const firstNumber = getRandNumber(multiplier);
+  const step = Math.max(1, getRandNumber(multiplier)); // Что бы step не оказался равен 0
+  const progression = getProgression(firstNumber, step);
 
   // Выбрать случайный индекс для скрытия числа
   const lastIndex = progression.length - 1;
@@ -34,8 +33,8 @@ const getQuestionAndAnswer = () => {
   // Получить строку-вопрос со скрытым числом
   const question = getQuestion(progression, randomIndex);
 
-  // Получить верный ответ как string
-  const correctAnswer = String(progression[randomIndex]);
+  // Получить верный ответ
+  const correctAnswer = progression[randomIndex];
   return [question, correctAnswer];
 };
 

@@ -1,7 +1,7 @@
 import runGame from '../index.js';
 import getRandNumber from '../random.js';
 
-// Получить верный ответ (как string)
+// Получить верный ответ
 const getCorrectAnswer = ([firstNumber, secondNumber]) => {
   let greatestDivisor = 1;
   for (let i = 2; i <= Math.min(firstNumber, secondNumber); i += 1) {
@@ -9,13 +9,12 @@ const getCorrectAnswer = ([firstNumber, secondNumber]) => {
       greatestDivisor = i;
     }
   }
-  return String(greatestDivisor);
+  return greatestDivisor;
 };
 
 // Собираем данные для передачи их в игру
 const getQuestionAndAnswer = () => {
-  const multiplier = 100;
-  const gameData = [getRandNumber(multiplier), getRandNumber(multiplier)];
+  const gameData = [getRandNumber(), getRandNumber()];
 
   const question = gameData.join(' ');
   const correctAnswer = getCorrectAnswer(gameData);

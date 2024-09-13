@@ -9,15 +9,15 @@ const getRandOperator = () => {
   return operators[randomIndex];
 };
 
-// Получить верный ответ (как string)
+// Получить верный ответ
 const getCorrectAnswer = ([firstNumber, operator, secondNumber]) => {
   switch (operator) {
     case '+':
-      return String(Number(firstNumber) + Number(secondNumber));
+      return firstNumber + secondNumber;
     case '-':
-      return String(firstNumber - secondNumber);
+      return firstNumber - secondNumber;
     case '*':
-      return String(firstNumber * secondNumber);
+      return firstNumber * secondNumber;
     default:
       throw new Error(`Unknown operator: '${operator}'!`);
   }
@@ -25,8 +25,7 @@ const getCorrectAnswer = ([firstNumber, operator, secondNumber]) => {
 
 // Собираем данные для передачи их в игру
 const getQuestionAndAnswer = () => {
-  const multiplier = 100;
-  const gameData = [getRandNumber(multiplier), getRandOperator(), getRandNumber(multiplier)];
+  const gameData = [getRandNumber(), getRandOperator(), getRandNumber()];
 
   const question = gameData.join(' ');
   const correctAnswer = getCorrectAnswer(gameData);
